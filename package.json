@@ -1,6 +1,7 @@
 {
   "name": "express-simple-starter",
   "private": true,
+  "description": "touch -d 2024-08-18T18:12:30 ./files/sample1.txt",
   "scripts": {
     "start": "node index.js"
   },
