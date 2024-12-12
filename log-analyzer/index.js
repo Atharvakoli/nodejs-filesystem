@@ -1,6 +1,7 @@
 require("dotenv").config();
 const fs = require("fs");
 const path = require("path");
+const readline = require("readline");
 
 const logFilePath = process.env.LOG_FILE_PATH;
 
@@ -66,19 +67,27 @@ function logFileAnalyzer() {
       console.log(
         "Choose an option:\n 1. Summarize Errors and Warnings\n 2. Extract Error Messages 3. To stop"
       );
-      let userInput = prompt("Enter your choice: ");
-      switch (userInput) {
-        case 1:
-          summarizeLogs();
-          break;
-        case 2:
-          extractErrorMessages();
-        case 3:
-          toStop = false;
-        default:
-          console.log("Wrong input");
-          break;
-      }
+
+      let rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+      })
+
+      rl.question("Enter your Option in between 1-3", (input) => {
+        switch (input) {
+          case 1:
+            summarizeLogs();
+            break;
+          case 2:
+            extractErrorMessages();
+          case 3:
+            toStop = false;
+          default:
+            console.log("Wrong input");
+            break;
+        }
+        rl.close();
+      })
     }
   } catch (error) {
     console.error("Error while file loging", error.message);
